@@ -92,7 +92,7 @@ const Header = () => {
               </button>
             </Link>
 
-            <span className="md: hidden" onClick={toggleMenu}>
+            <span className="block md:hidden" onClick={toggleMenu}>
               <BiMenu className="w-6 h-6 cursor-pointer" />
             </span>
           </div>
