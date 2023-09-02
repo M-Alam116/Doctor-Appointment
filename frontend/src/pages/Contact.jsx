@@ -21,6 +21,35 @@ const Contact = () => {
               className="form__input mt-1"
             />
           </div>
+
+          <div>
+            <label htmlFor="email" className="form__label">
+              Subject
+            </label>
+            <input
+              type="text"
+              name="subject"
+              id="subject"
+              placeholder="Let us know how we can help you"
+              className="form__input mt-1"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="email" className="form__label">
+              Your Message
+            </label>
+            <textarea
+              rows="6"
+              type="text"
+              name="message"
+              id="message"
+              placeholder="Leave a comment...."
+              className="form__input mt-1 resize-none"
+            />
+          </div>
+
+          <button type="submit" className="btn rounded sm:w-fit">Submit</button>
         </form>
       </div>
     </section>
