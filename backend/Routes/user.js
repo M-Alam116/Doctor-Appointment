@@ -8,6 +8,7 @@ import {
 
 const router = express.Router();
 
+// User routes
 router.get("/:id", getSingleUser);
 router.get("/", getAllUsers);
 router.put("/:id", updateUser);
