@@ -1,6 +1,7 @@
 import { useEffect, useRef, useContext } from "react";
 import logo from "../../assets/images/logo.png";
-import userImg from "../../assets/images/avatar-icon.png";
+// import userImg from "../../assets/images/avatar-icon.png";
+import profileImg from "../../assets/images/profile.png";
 import { NavLink, Link } from "react-router-dom";
 import { BiMenu } from "react-icons/bi";
 import { authContext } from "../../context/AuthContext";
@@ -55,7 +56,9 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* =========== logo ========= */}
           <div>
-            <img src={logo} alt="" />
+            <Link to="/">
+              <img src={logo} alt="" className="w-[200px] h-[80px]" />
+            </Link>
           </div>
 
           {/* ========= menu ========= */}
@@ -90,11 +93,19 @@ const Header = () => {
                   }`}
                 >
                   <figure className="w-[35px] h-[35px] rounded-full cursor-pointer">
-                    <img
-                      src={user?.photo}
-                      className="w-full rounded-full"
-                      alt=""
-                    />
+                    {!user?.photo ? (
+                      <img
+                        src={profileImg}
+                        className="w-full h-full rounded-full"
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        src={user.photo}
+                        className="w-full h-full rounded-full border-2 border-solid border-primaryColor"
+                        alt=""
+                      />
+                    )}
                   </figure>
                 </Link>
               </div>

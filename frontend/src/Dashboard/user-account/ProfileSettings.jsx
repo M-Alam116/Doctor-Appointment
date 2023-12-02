@@ -4,6 +4,7 @@ import uploadImageToCloudinary from "../../utils/uploadCloudinary";
 import { BASE_URL, token } from "../../config";
 import { toast } from "react-toastify";
 import HashLoader from "react-spinners/HashLoader";
+import profileImg from "../../assets/images/profile.png";
 const ProfileSettings = ({ user }) => {
   const [selectedFile, setSlectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -37,7 +38,7 @@ const ProfileSettings = ({ user }) => {
     const file = event.target.files[0];
     const data = await uploadImageToCloudinary(file);
     setSlectedFile(data.url);
-    setFormData({ ...FormData, photo: data.type.url });
+    setFormData({ ...FormData, photo: data.url });
   };
 
   const submitHandler = async (e) => {
@@ -137,15 +138,23 @@ const ProfileSettings = ({ user }) => {
         </div>
 
         <div className="mb-5 flex items-center gap-3">
-          {FormData.photo && (
-            <figure className="w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor flex items-center justify-center">
-              <img
-                src={FormData.photo}
-                alt=""
-                className="w-full rounded-full"
-              />
+          <div className="flex items-center justify-center">
+            <figure className="w-[60px] h-[60px] rounded-full">
+              {!FormData?.photo ? (
+                <img
+                  src={profileImg}
+                  className="w-full h-full rounded-full"
+                  alt=""
+                />
+              ) : (
+                <img
+                  src={FormData.photo}
+                  className="w-full h-full rounded-full border-2 border-solid border-primaryColor"
+                  alt=""
+                />
+              )}
             </figure>
-          )}
+          </div>
 
           <div className="relative w-[130px] h-[50px]">
             <input

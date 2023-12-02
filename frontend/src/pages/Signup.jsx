@@ -15,7 +15,7 @@ const Signup = () => {
     name: "",
     email: "",
     password: "",
-    photo: selectedFile,
+    photo: null,
     role: "patient",
     gender: "male",
   });
@@ -28,12 +28,19 @@ const Signup = () => {
 
   const handleFileInputChange = async (event) => {
     const file = event.target.files[0];
-    const data = await uploadImageToCloudinary(file);
-    setPreviewUrl(data.url);
-    setSlectedFile(data.url);
-    setFormData({ ...FormData, photo: data.type.url });
+    try {
+      const data = await uploadImageToCloudinary(file);
+
+      setPreviewUrl(data.url);
+      setSlectedFile(data.url);
+
+      setFormData((prevState) => ({ ...prevState, photo: selectedFile }));
+    } catch (error) {
+      console.error("Error uploading to Cloudinary:", error);
+    }
   };
 
+  console.log(FormData);
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -181,7 +188,7 @@ const Signup = () => {
                   type="submit"
                   className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3"
                 >
-                  {loading ? <HashLoader size={35} color="#ffff"/> : "Sign Up"}
+                  {loading ? <HashLoader size={35} color="#ffff" /> : "Sign Up"}
                 </button>
               </div>
 

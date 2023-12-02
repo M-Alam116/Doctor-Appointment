@@ -6,6 +6,7 @@ import useGetProfile from "../../hooks/useFetchData";
 import { BASE_URL } from "../../config";
 import Loading from "../../components/loader/Loading";
 import Error from "../../components/Error/Error";
+import profileImg from "../../assets/images/profile.png";
 const MyAccount = () => {
   const { dispatch } = useContext(authContext);
   const [tab, setTab] = useState("bookings");
@@ -15,8 +16,6 @@ const MyAccount = () => {
     loading,
     error,
   } = useGetProfile(`${BASE_URL}/users/profile/me`);
-
-  console.log(userData, "user data");
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
@@ -32,12 +31,20 @@ const MyAccount = () => {
           <div className="grid md:grid-cols-3 gap-10">
             <div className="pb-[50px] px-[30px] rounded-md">
               <div className="flex items-center justify-center">
-                <figure className="w-[100px] h-[100px] rounded-full border-2 border-solid border-primaryColor">
-                  <img
-                    src={userData.photo}
-                    alt=""
-                    className="w-full h-full rounded-full"
-                  />
+                <figure className="w-[100px] h-[100px] rounded-full">
+                  {!userData?.photo ? (
+                    <img
+                      src={profileImg}
+                      className="w-full h-full rounded-full"
+                      alt=""
+                    />
+                  ) : (
+                    <img
+                      src={userData.photo}
+                      className="w-full h-full rounded-full border-2 border-solid border-primaryColor"
+                      alt=""
+                    />
+                  )}
                 </figure>
               </div>
 
@@ -91,7 +98,7 @@ const MyAccount = () => {
               </div>
 
               {tab === "bookings" && <MyBookings />}
-              {tab === "settings" && <ProfileSettings user={userData}/>}
+              {tab === "settings" && <ProfileSettings user={userData} />}
             </div>
           </div>
         )}
